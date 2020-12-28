@@ -1,0 +1,124 @@
+﻿@model WebHpShop.Reponsitory.Dto.UserDto
+@{
+    Layout = null;
+}
+
+        <div class="headUser">
+            <div class="h5">Hồ sơ của tôi</div>
+            <div>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+        </div>
+        <hr>
+        <form asp-action="UpdateCustomerDetail" asp-controller="User" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <input asp-for="UserId" type="hidden" />
+                <input asp-for="RoleId"  type="hidden" />
+                <div class="col">
+                    <table class="tableDeltailUser">
+                        <tbody>
+                            <tr class="fromTr">
+                                <td>Tên Đăng Nhập : </td>
+                                <td>
+                                    <input asp-for="Username" class="form-control" required />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Họ : </td>
+                                <td>
+                                    <input asp-for="FirstName" class="form-control" required />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Tên : </td>
+                                <td>
+                                    <input asp-for="LastName" class="form-control" required />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Email : </td>
+                                <td>
+                                    <input asp-for="Email" class="form-control" required />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Số Điện Thoại : </td>
+                                <td>
+                                    <input asp-for="Phone" class="form-control" required />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Giới Tính : </td>
+                                <td>
+                                    <select asp-for="Gender" class="form-control" required>
+                                        <option value="true">Nam</option>
+                                        <option value="false">Nữ</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Ngày Sinh : </td>
+                                <td>
+                                    <input asp-for="Birthday" class="form-control" required />
+                                    <span asp-validation-for="Birthday" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Địa Chỉ : </td>
+                                <td>
+                                    <input asp-for="Address" class="form-control" required />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr class="fromTr">
+                                <td>Mật Khẩu </td>
+                                <td>
+                                    <input asp-for="Password" type="password" class="form-control" required />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <table>
+                        <tr>
+                            <td><img src="~/Images/@Model.ImgAvatar" style="width: 280px;height: 280px" class="rounded-circle" /></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input asp-for="ImageAvt" class="custom-file-input" width="200" type="file">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+            </div>
+            <div class="btnUpdate">
+                <br>
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+            <div class="clearfix"></div>
+        </form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

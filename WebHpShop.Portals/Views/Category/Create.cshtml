@@ -1,0 +1,33 @@
+﻿@model WebHpShop.Reponsitory.Dto.CategoryDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout1";
+}
+
+<h3>Thêm Loại Sản Phẩm</h3>
+<hr />
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addCategoryLabel">Thêm Loại Sản Phẩm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form asp-action="Create" class="form-group">
+                <div asp-validation-summary="ModelOnly" class="alert"></div>
+                <div class="form-group">
+                    <label class="col-form-label">Tên Loại Sản Phẩm</label>
+                    <input asp-for="CatergoryName" type="text" class="form-control" placeholder="Tên Loại Sản Phẩm" />
+                    <span asp-validation-for="CatergoryName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

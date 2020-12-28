@@ -1,0 +1,337 @@
+﻿
+@model WebHpShop.Reponsitory.Dto.UserDto
+@{ ViewData["Title"] = "Checkout";
+    Layout = "_LayoutHomePage";
+
+}
+
+<link href="~/roothome/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+<main id="main-site">
+    <div class="container">
+        <div class="ContentCart">
+            @if (ViewBag.cart == null)
+            {
+                   <div class="notCart"><b>Không Có Đơn Hàng Nào</b></div>
+            }
+            else
+            {
+                <div class="review-payment">
+                    <h2>KIỂM TRA LẠI ĐƠN HÀNG</h2>
+                </div>
+                <div class="table-responsive cart_info" style="margin-bottom: 15px; overflow: hidden">
+
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image">Ảnh</td>
+                                <td class="description">Tên Sản phầm</td>
+                                <td class="price">Giá</td>
+                                <td class="quantity">Số Lượng</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in ViewBag.cart)
+                            {
+
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="~/images/@item.PathImage" alt="" width="110" height="110"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.Id">Tên Sản Phẩm: @item.ProducName</a></h4>
+                                        <p class="BookCode">Mã Sản Phầm : @item.Id</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>@string.Format(@String.Format("{0:0,0 vnđ}", @item.Price))</p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <div class="cart_quantity_button">
+                                            <label class="quantity_a_product" id="quantity_a_product" style="opacity: 0.8;">@item.Quantity</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                                <td colspan="2">
+                                    <table class="table table-condensed total-result">
+                                        <tr>
+                                            <td>Tổng Tiền</td>
+                                            <td><span id="Sum_Money_Of_Cart">@string.Format(@String.Format("{0:0,0 vnđ}", @ViewBag.total))</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                    <form asp-action="BuyNow" asp-controller="CheckOut">
+                        <div class="address-new-order" style="display: block; margin-top: 15px">
+                            <h3>Mời bạn Kiểm Tra Lại Thông Tin</h3>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div asp-validation-summary="ModelOnly" class="alert"></div>
+                                    <input type="hidden" asp-for="UserId" />
+                                    <div class="form-group">
+                                        <label class="col-form-label">Họ</label>
+                                        <input asp-for="FirstName" type="text" class="form-control" placeholder="Họ" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Tên</label>
+                                        <input asp-for="LastName" type="text" class="form-control" placeholder="Tên" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Địa Chỉ</label>
+                                        <input asp-for="OrderAddress" type="text" class="form-control" placeholder="Địa Chỉ" />
+                                        <span asp-validation-for="OrderAddress" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Email</label>
+                                        <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Số Điện Thoại</label>
+                                        <input asp-for="Phone" type="number" class="form-control" placeholder="Số Điện Thoại" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 offset-sm-10">
+                                <input type="submit" id="MuaNgay" class="btn btn-primary" value="Đặt Hàng Ngày">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            }
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+
+        // show data grid
+        // all
+        $(document).ready(function () {
+            $("#gridOrder").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadData2",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+
+
+        // show data grid
+        // Comfirm
+        $(document).ready(function () {
+            var data = 1;
+            $("#gridOrderWait").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadData",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>   " +
+                                "  <a href='#' class='fas fa-times' onclick=DeleteData('" + full.orderId + "');></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        // Wait
+        $(document).ready(function () {
+            var data = 2;
+            $("#gridOrderComfirm").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadData",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a> <b> </b>  " +
+                                "  <a href='#' class='fas fa-times' onclick=DeleteData('" + full.orderId + "');></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        // ShipDone
+        $(document).ready(function () {
+            var data = 4;
+            $("#gridOrderShipDone").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadData",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+
+        // Delete
+        $(document).ready(function () {
+            var data = 3;
+            $("#gridOrderDelete").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadData",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+         function Delete(id){
+             var url = '@Url.Content("~/")' + "Order/UserDeletedOrder/";
+                $.post(url, { id: id }, function (data)
+                        {
+                            if (data)
+                            {
+                                alert("Đã hủy đơn hàng");
+                                oTable = $('#gridOrderWait').DataTable();
+                                oTable.draw();
+                            }
+                            else
+                            {
+                                alert("Something Went Wrong!");
+                            }
+                        });
+                }
+
+        function DeleteData(id) {
+            if (confirm("Bạn Thật Sự Muốn Hủy Đơn Hàng ...?")) {
+                Delete(id)
+            }
+            else {
+                return false;
+            }
+        }
+
+    </script>
+}
+

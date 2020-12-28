@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutHomePage";
+}
+
+  
+<!-- start #main-site -->
+    <main id="main-site">
+
+        <!-- Owl-carousel -->
+        <section id="banner-area">
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <img src="~/homepage/assets/Banner1.png" alt="Banner1">
+                </div>
+                <div class="item">
+                    <img src="~/homepage/assets/Banner2.png" alt="Banner2">
+                </div>
+                <div class="item">
+                    <img src="~/homepage/assets/Banner1.png" alt="Banner3">
+                </div>
+            </div>
+        </section>
+
+        <!--Search-->
+        <section id="Search">
+        </section>
+        <!-- !Owl-carousel -->
+        <!-- Top Sale -->
+        <br />
+        <br />
+        <section id="top-sale">
+        </section>
+        <!-- !Top Sale -->
+        <!-- Special Price -->
+        <br />
+        <br />
+        <section id="special-price" class="allPhone">
+        </section>
+        <br />
+        <br />
+        <section id="special-price" class="allLaptop">
+        </section>
+
+        <br />
+        <br />
+        <!-- !Special Price -->
+        <!-- Banner Ads  -->
+        <section id="banner_adds">
+            <div class="container py-5 text-center">
+                <img src="~/homepage/assets/banner1-cr-500x150.jpg" alt="banner1" class="img-fluid">
+                <img src="~/homepage/assets/banner2-cr-500x150.jpg" alt="banner1" class="img-fluid">
+            </div>
+        </section>
+        <!-- !Banner Ads  -->
+        <!-- New Phones -->
+        <br />
+        <br />
+        <section id="new-phones">
+        </section>
+        <!-- !New Phones -->
+        <!-- Blogs -->
+        <section id="blogs">
+            <div class="container py-4">
+                <h4 class="font-rubik font-size-20">Latest Blogs</h4>
+                <hr>
+
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <div class="card border-0 font-rale mr-5" style="width: 18rem;">
+                            <h5 class="card-title font-size-16">Upcoming Mobiles</h5>
+                            <img src="~/homepage/assets/blog/blog1.jpg" alt="cart image" class="card-img-top">
+                            <p class="card-text font-size-14 text-black-50 py-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis non iste sequi cupiditate tempora iure. Velit accusamus saepe harum sed.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card border-0 font-rale mr-5" style="width: 18rem;">
+                            <h5 class="card-title font-size-16">Upcoming Mobiles</h5>
+                            <img src="~/homepage/assets/blog/blog2.jpg" alt="cart image" class="card-img-top">
+                            <p class="card-text font-size-14 text-black-50 py-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis non iste sequi cupiditate tempora iure. Velit accusamus saepe harum sed.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card border-0 font-rale mr-5" style="width: 18rem;">
+                            <h5 class="card-title font-size-16">Upcoming Mobiles</h5>
+                            <img src="~/homepage/assets/blog/blog3.jpg" alt="cart image" class="card-img-top">
+                            <p class="card-text font-size-14 text-black-50 py-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis non iste sequi cupiditate tempora iure. Velit accusamus saepe harum sed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- !Blogs -->
+        <br />
+        <br />
+    </main>
+<!-- !start #main-site -->
+
+
+@section Scripts{
+    
+
+    <script type="text/javascript">
+
+        $.ajax({
+            url: '/Product/TopSale',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('#top-sale').html(data);
+            }
+        });
+        $.ajax({
+            url: '/Product/AllPhone',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('.allPhone').html(data);
+            }
+        }); 
+        $.ajax({
+            url: '/Product/AllLapTop',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('.allLaptop').html(data);
+            }
+        });
+         $.ajax({
+            url: '/Product/ProductNew',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('#new-phones').html(data);
+            }
+        });
+    </script>
+}

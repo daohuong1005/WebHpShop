@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebHpShop.Service.ViewModel.ProductDiscounViewModel>
+@{
+    Layout = null;
+    IEnumerable<ManufacturerViewModel> Mafu = (IEnumerable<ManufacturerViewModel>)ViewBag.Maufu;
+}
+
+<script src="~/homepage/index.js"></script>
+<div class="container">
+    <h4 class="font-rubik font-size-20">Điện Thoại</h4>
+    <div id="filters" class="button-group text-right font-baloo font-size-16">
+        <button class="btn is-checked" data-filter="*">All Brand</button>
+        @foreach (var item in Mafu)
+        {
+            <button class="btn" data-filter=".@item.manufacturerName">@item.manufacturerName</button>
+        }
+    </div>
+
+    <div class="grid">
+        @foreach (var item in Model)
+        {
+            <div class="grid-item @item.ManufacturerName border">
+                <div class="item py-2" style="width: 200px;">
+                    <div class="product">
+                        <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.Id"><img src="~/Images/@item.Image" alt="product1" class="img-fluid" style="height:200px"></a>
+                        <div class="text-center">
+                            <h6>@item.ProductName</h6>
+
+                            <div class="price py-2">
+                                <span> @String.Format("{0:0,0 vnđ}", item.DisscountMoney)</span>
+                            </div>
+                            <div class="price py-2">
+                                <span><del> @String.Format("{0:0,0 vnđ}", item.Price)</del></span>
+                            </div>
+                            <a asp-action="BuyProducts2" asp-controller="Cart" asp-route-Id="@item.Id" class="btn btn-outline-warning">
+                                <i class="fa fa-shopping-cart"></i>Mua Ngay
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

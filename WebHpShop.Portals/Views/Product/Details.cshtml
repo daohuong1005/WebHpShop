@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebHpShop.Service.ViewModel.ProductDetailViewModel>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_LayoutAdmin";
+}
+
+@foreach (var item in Model)
+{
+    <h3>@item.ProductName</h3>
+    <div class="image">
+        <img src="~/Images/@item.UrlImg" width="400" height="400" />
+    </div>
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <th>Mã Sản Phẩm</th>
+                <td>@item.ProductId</td>
+            </tr>
+            <tr>
+                <th>Tên Sản Phẩm</th>
+                <td>@item.ProductName</td>
+            </tr>
+            <tr>
+                <th>Hệ Điều Hành</th>
+                <td>
+                    @item.OperatingSystem
+                </td>
+            </tr>
+            <tr>
+                <th>CPU</th>
+                <td>
+                    @item.GPU
+                </td>
+            </tr>
+            <tr>
+                <th>Ram</th>
+                <td>
+                    @item.Ram GB
+                </td>
+            </tr>
+            <tr>
+                <th>Rom</th>
+                <td>
+                    @item.Rom GB
+                </td>
+            </tr>
+            <tr>
+                <th>GPU</th>
+                <td>@item.GPU</td>
+            </tr>
+            <tr>
+                <th>Màn Hình</th>
+                <td>@item.Screen</td>
+            </tr>
+            <tr>
+                <th>Độ Phần Giải</th>
+                <td>@item.Pixel</td>
+            </tr>
+            <tr>
+                <th>Kích Thước Màn Hình</th>
+                <td>@item.Size</td>
+            </tr>
+            <tr>
+                <th>Camera Trước</th>
+                <td>@item.CameraFirst</td>
+            </tr>
+            <tr>
+                <th>Camera Sau</th>
+                <td>@item.CameraLast</td>
+            </tr>
+            <tr>
+                <th>Hỗ Trợ</th>
+                <td>@item.Support</td>
+            </tr>
+            <tr>
+                <th>Giá Nhập</th>
+                <td>@item.CostBuy</td>
+            </tr>
+            <tr>
+                <th>Giá Bán</th>
+                <td>@item.CostSell</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Update" asp-route-id="@item.ProductId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+}

@@ -1,0 +1,60 @@
+﻿.clear-fixs {
+    height: 10px;
+}
+
+.fixTien {
+    text-align: right;
+    margin-top: 10px;
+}
+
+li.itemStatust {
+    list-style: none;
+}
+
+.shipping-status-box {
+    text-align: center;
+    background: #fff;
+    padding: 30px 58px;
+}
+
+ul.statust-list {
+    display: flex;
+    justify-content: center;
+}
+
+.satust-processing {
+    position: relative;
+    box-sizing: inherit;
+}
+
+li.itemStatust {
+    display: flex;
+    text-align: center;
+}
+
+img {
+    width: 44px;
+    height: 44px;
+}
+
+p.status-text {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    white-space: nowrap;
+    font-family: Roboto-Medium;
+    font-size: 12px;
+    color: #333;
+}
+
+hr.status-line.gray {
+    border: 1px dashed #dadada;
+    width: 100px;
+    margin-top: 23px;
+}
+
+hr.status-line.line {
+    border: 1px dashed #000;
+    width: 100px;
+    margin-top: 23px;
+}

@@ -1,0 +1,131 @@
+﻿@model WebHpShop.Reponsitory.Dto.ProductDto
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout1";
+}
+
+<h3>Thêm Sản Phẩmt</h3>
+<hr />
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addProductLabel">Thêm Sản Phẩm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form asp-action="Create" class="form-group">
+                <div asp-validation-summary="ModelOnly" class="alert"></div>
+                <div class="form-group">
+                    <label class="col-form-label">Tên Sản Phẩm</label>
+                    <input asp-for="ProductName" type="text" class="form-control" placeholder="Tên Sản Phẩm" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Loại Sản Phẩm</label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Nhà Sản Xuất</label>
+                    <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Hãng Sản Phẩm</label>
+                    <select asp-for="ManufacturerId" class="form-control" asp-items="ViewBag.ManufacturerId"></select>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Hệ Điều Hành</label>
+                    <input asp-for="OperatingSystem" type="text" class="form-control" placeholder="Hệ Điều Hành" />
+                    <span asp-validation-for="OperatingSystem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">CPU</label>
+                    <input asp-for="CPU" type="text" class="form-control" placeholder="CPU" />
+                    <span asp-validation-for="CPU" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">RAM</label>
+                    <input asp-for="Ram" type="text" class="form-control" placeholder="Ram" />
+                    <span asp-validation-for="Ram" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">ROM</label>
+                    <input asp-for="Rom" type="text" class="form-control" placeholder="ROM" />
+                    <span asp-validation-for="Rom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">GPU</label>
+                    <input asp-for="GPU" type="text" class="form-control" placeholder="GPU" />
+                    <span asp-validation-for="GPU" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Màn Hình</label>
+                    <input asp-for="Screen" type="text" class="form-control" placeholder="Màn Hình" />
+                    <span asp-validation-for="Screen" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Pixel</label>
+                    <input asp-for="Pixel" type="text" class="form-control" placeholder="Pixel" />
+                    <span asp-validation-for="Pixel" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Kích Thước Màn Hình</label>
+                    <input asp-for="Size" type="text" class="form-control" placeholder="Kích Thước Màn Hình" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Camera Sau</label>
+                    <input asp-for="CameraLast" type="text" class="form-control" placeholder="Camera Sau" />
+                    <span asp-validation-for="CameraLast" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Camera Trước</label>
+                    <input asp-for="CameraFirst" type="text" class="form-control" placeholder="Camera Trước" />
+                    <span asp-validation-for="CameraFirst" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Hỗ Trợ</label>
+                    <input asp-for="Support" type="text" class="form-control" placeholder="Hỗ Trợ" />
+                    <span asp-validation-for="Support" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Mô Tả</label>
+                    <input asp-for="Description" type="text" class="form-control" placeholder="Mô tả" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Chi Phí Mua</label>
+                    <input asp-for="CostBuy" type="text" class="form-control" placeholder="Chi Phí Mua" />
+                    <span asp-validation-for="CostBuy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Chi Phí Bán</label>
+                    <input asp-for="CostSell" type="text" class="form-control" placeholder="Chi Phí Bán" />
+                    <span asp-validation-for="CostSell" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Tron Kho Còn</label>
+                    <input asp-for="InStock" type="text" class="form-control" placeholder="Số Lượng" />
+                    <span asp-validation-for="InStock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Mã Màu</label>
+                    <input asp-for="ColorCode" type="text" class="form-control" placeholder="Mã Màu" />
+                    <span asp-validation-for="ColorCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Tên Màu</label>
+                    <input asp-for="NameColor" type="text" class="form-control" placeholder="Tên Màu" />
+                    <span asp-validation-for="NameColor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Tạo" class="btn btn-primary" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

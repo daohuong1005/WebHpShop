@@ -1,0 +1,19 @@
+﻿@model WebHpShop.Reponsitory.Dto.ManufacturerDto
+@{
+    ViewBag.Title = "Update";
+    Layout = "_LayoutAdmin";
+}
+<div class="modal-body">
+    <form asp-action="Update" asp-controller="Manufacturer" class="form-group">
+        <div asp-validation-summary="ModelOnly" class="alert"></div>
+        <input type="hidden" asp-for="manufacturerId" /> 
+        <div class="form-group">
+            <label class="col-form-label">Tên Hãng</label>
+            <input asp-for="manufacturerName" type="text" class="form-control" placeholder="Tên Hãng" />
+            <span asp-validation-for="manufacturerName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

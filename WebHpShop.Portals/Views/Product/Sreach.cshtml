@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebHpShop.Service.ViewModel.ProductDiscounViewModel>
+@{
+    Layout = null;
+    IEnumerable<ManufacturerViewModel> Mafu = (IEnumerable<ManufacturerViewModel>)ViewBag.Maufu;
+}
+
+<script src="~/homepage/index.js"></script>
+<div class="container">
+    <h4 class="font-rubik font-size-20">Kết Quả Tìm Kiếm</h4>
+    <hr class="m-0">
+    <br />
+    <br />
+    @if (Model == null)
+    {
+        <div class="displayErorr">
+            <p class="ValueNot">Không tìm thấy sản phầm nào</p>
+        </div>
+    }
+    else
+    {
+        <div class="grid">
+            @foreach (var item in Model)
+            {
+                <div class="grid-item @item.ManufacturerName border" style="margin-right:20px; margin-bottom:20px">
+                    <div class="items py-2" style="width: 200px; ">
+                        <div class="product">
+                            <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.Id"><img src="~/Images/@item.Image" alt="product1" class="img-fluid" style="height:200px"></a>
+                            <div class="text-center">
+                                <h6>@item.ProductName</h6>
+
+                                <div class="price py-2">
+                                    <span> @String.Format("{0:0,0 vnđ}", item.Price)</span>
+                                </div>
+                                <a asp-action="BuyProducts2" asp-controller="Cart" asp-route-Id="@item.Id" class="btn btn-outline-warning">
+                                    <i class="fa fa-shopping-cart"></i>Mua Ngay
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+

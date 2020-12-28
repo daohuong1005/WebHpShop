@@ -1,0 +1,126 @@
+.content_mid1 .tit_mid_ct1 {
+    color: #333;
+}
+.titel_head {
+    text-align: center;
+}
+li.list_top1 {
+    color: #ff0000;
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: bold;
+}
+li.list_top2 {
+    color: #0214ff;
+    font-family: Roboto_Regular;
+}
+.tt_header h2 {
+    font-size: 32px;
+    font-family: Roboto;
+    font-weight: bold;
+    color: #ff0000;
+}
+.tt_header p {
+    font-size: 16px;
+    font-family: Roboto_Regular;
+}
+.bangnhap table tr td {
+    border: 1px solid;
+    padding: 3px 5px;
+}
+section.title_top {
+    padding: 10px 0;
+}
+.tt_top {
+    position: relative;
+}
+.tit_mid_ct1 p a:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+.tt_top h4 {
+    top: 13px;
+    left: 30%;
+    transform: translateY(-30%);
+    margin: 0 auto;
+    position: absolute;
+    font-family: Roboto_Bold;
+    font-size: 18px;
+}
+.title_main p {
+    font-size: 14px;
+    font-family: Roboto_Regular;
+    line-height: 30px;
+}
+.vanchuyen table tr td {
+    border: 1px solid;
+    padding: 3px 28px;
+}
+section.quytrinh {
+    padding: 20px 0;
+    font-size: 14px;
+    font-family: Roboto_Regular;
+    line-height: 27px;
+}
+.title_qt {
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: Roboto_Bold;
+}
+.title_mid_qt h5 {
+    font-family: Roboto_Bold;
+    padding: 8px 0;
+}
+.title_mid_qt p {
+    padding-left: 20px;
+}
+.title_mid h5 {
+    left: 20%;
+    transform: translateY(-40%);
+    position: absolute;
+    font-family: Roboto_Bold;
+}
+.title_main span a {
+    font-weight: bold;
+    color: #333;
+}
+.title_main span a:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+.information tr td {
+    border: 1px solid;
+    text-align: center;
+}
+.information tr th {
+    border: 1px solid;
+    padding: 3px 19px;
+    text-align: center;
+}
+.information tr {
+    border: 1px dotted;
+    width: 100%;
+}
+.information table {
+    width: 100%;
+}
+.tinhtien {
+    width: 100%;
+}
+.tinhtien td {
+    width: 50%;
+}
+.tinhtien .td1 {
+    text-align: left !important;
+    padding-left: 10px;
+}
+.kyten {
+    text-align: center;
+    padding-bottom: 50px;
+}
+.kyten h5 {
+    font-family: Roboto_Bold;
+}
+.title_main table tr td {
+    text-align: justify;
+}

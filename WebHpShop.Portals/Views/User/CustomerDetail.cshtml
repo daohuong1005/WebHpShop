@@ -1,0 +1,436 @@
+﻿@model WebHpShop.Service.ViewModel.UserViewModel
+@{
+    Layout = "_LayoutHomePage";
+}
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/homepage/ComfirmError.css" rel="stylesheet" />
+<main id="main-site">
+    <div class="container">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-sm-3" style="background-color: azure;">
+                <div class="titelFont">
+                    <b>Quản Lý Tài Khoản</b>
+                </div>
+                <br />
+            </div>
+            <div class="col-sm-9">
+                <div class="FormAccount">
+                    <div class="headUser">
+                        <div class="h5">Hồ sơ của tôi</div>
+                        <div>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <table class="tableDeltailUser">
+                                <tbody>
+                                    <tr class="fromTr">
+                                        <td>Tên Đăng Nhập : </td>
+                                        <td>@Html.DisplayFor(Model => Model.Username)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Họ : </td>
+                                        <td>@Html.DisplayFor(Model => Model.FirstName)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Tên : </td>
+                                        <td>@Html.DisplayFor(Model => Model.LastName)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Email : </td>
+                                        <td>@Html.DisplayFor(Model => Model.Email)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Số Điện Thoại : </td>
+                                        <td>@Html.DisplayFor(Model => Model.Phone)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Giới Tính : </td>
+                                        <td>
+                                            @if (Model.Gender == true)
+                                            {
+                                                @Html.Raw("Nam");
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Nữ");
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Ngày Sinh : </td>
+                                        <td>@Html.DisplayFor(Model => Model.Birthday)</td>
+                                    </tr>
+                                    <tr class="fromTr">
+                                        <td>Địa Chỉ : </td>
+                                        <td>@Html.DisplayFor(Model => Model.Address)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <div class="btnUpdate">
+                                <button class="btnUpdateUser btn-primary">Cập Nhật Tài Khoản </button>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="col">
+                            @{
+                                var mylink = Url.Content("~/Images/") + Model.ImgAvatar;
+                            }
+                            <img src="@mylink" style="width: 280px;height: 280px" class="rounded-circle" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <br />
+            <hr />
+            <div class="col-sm-3" style="background-color: azure;">
+                <div class="titelFont">
+                    <b>Đơn Hàng Của Tôi</b>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="OrderManager">
+                    <h3>Đơn Hàng</h3>
+                    <br>
+                    <div class="DsDonHangs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#allOrder">Tất Cả Các Đơn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#Wait">Chờ Xác Nhận</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#comfirm">Đang Giao</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#shipDone">Đã Giao</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#delete">Đã Hủy</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="allOrder" class="container tab-pane active">
+                                <div class="AllOrder">
+                                    <div style="width:100%; margin:0 auto;">
+                                        <table id="gridOrder" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Mã Đơn Hàng</th>
+                                                    <th>Tài Khoản Kh</th>
+                                                    <th>Ngày Đặt</th>
+                                                    <th>Trạng Thái</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="Wait" class="container tab-pane fade">
+                                <div style="width:100%; margin:0 auto;">
+                                    <table id="gridOrderWait" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Mã Đơn Hàng</th>
+                                                <th>Tài Khoản Kh</th>
+                                                <th>Ngày Đặt</th>
+                                                <th>Trạng Thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="comfirm" class="container tab-pane fade">
+                                <div style="width:100%; margin:0 auto;">
+                                    <table id="gridOrderComfirm" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Mã Đơn Hàng</th>
+                                                <th>Tài Khoản Kh</th>
+                                                <th>Ngày Đặt</th>
+                                                <th>Trạng Thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="shipDone" class="container tab-pane fade">
+                                <div style="width:100%; margin:0 auto;">
+                                    <table id="gridOrderShipDone" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Mã Đơn Hàng</th>
+                                                <th>Tài Khoản Kh</th>
+                                                <th>Ngày Đặt</th>
+                                                <th>Trạng Thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="delete" class="container tab-pane fade">
+                                <div style="width:100%; margin:0 auto;">
+                                    <table id="gridOrderDelete" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Mã Đơn Hàng</th>
+                                                <th>Tài Khoản Kh</th>
+                                                <th>Ngày Đặt</th>
+                                                <th>Trạng Thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+        </div>
+</main>
+@section Scripts{
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+
+        // show data grid
+        // all
+        $(document).ready(function () {
+            $("#gridOrder").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadDataUser2",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        // show data grid
+        // Comfirm
+        $(document).ready(function () {
+            var data = 1;
+            $("#gridOrderWait").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadDataUser",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>   " +
+                                "  <a href='#' class='fas fa-times' onclick=DeleteData('" + full.orderId + "');></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        // Wait
+        $(document).ready(function () {
+            var data = 2;
+            $("#gridOrderComfirm").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadDataUser",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a> <b> </b>  " +
+                                "  <a href='#' class='fas fa-times' onclick=DeleteData('" + full.orderId + "');></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        // ShipDone
+        $(document).ready(function () {
+            var data = 4;
+            $("#gridOrderShipDone").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadDataUser",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+
+        // Delete
+        $(document).ready(function () {
+            var data = 3;
+            $("#gridOrderDelete").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Order/LoadDataUser",
+                    "type": "POST",
+                    "datatype": "json",
+                    data: { data: data }
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "orderId", "name": "OrderId", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    { "data": "orderDate", "name": "OrderDate", "autoWidth": true },
+                    { "data": "statusName", "name": "StatusName", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a class='fas fa-asterisk' href='/Order/DetailOrder2/" + full.orderId + "'></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+         function Delete(id){
+             var url = '@Url.Content("~/")' + "Order/UserDeletedOrder/";
+                $.post(url, { id: id }, function (data)
+                        {
+                            if (data)
+                            {
+                                alert("Đã hủy đơn hàng");
+                                oTable = $('#gridOrderWait').DataTable();
+                                oTable.draw();
+                            }
+                            else
+                            {
+                                alert("Something Went Wrong!");
+                            }
+                        });
+                }
+
+        function DeleteData(id) {
+            if (confirm("Bạn Thật Sự Muốn Hủy Đơn Hàng ...?")) {
+                Delete(id)
+            }
+            else {
+                return false;
+            }
+        }
+
+        $('.btnUpdateUser').click(function() {
+             $.ajax({
+                 url: '/User/UpdateCustomerDetail',
+                 type: 'GET',
+                 dataType: 'html',
+                 success: function (data) {
+                     $('.FormAccount').html(data);
+                 }
+             });
+        });
+
+    </script>
+}

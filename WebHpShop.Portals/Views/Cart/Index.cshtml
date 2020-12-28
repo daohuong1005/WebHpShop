@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WebHpShop.Reponsitory.Dto.CartDto>
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "_LayoutHomePage";
+}
+<main id="main-site">
+    <div class="container">
+        @if (ViewBag.cart == null || ViewBag.SumProduct == 0)
+        {
+            <div class="fs-ghnull">
+                <p class="fs-ghnl1"><img src="https://fptshop.com.vn/gio-hang-v2/cart/Desktop/images/null.png" alt="cart null" /></p>
+                <p class="fs-ghnl2">Không có sản phẩm nào trong giỏ hàng</p>
+                <a class="fs-ghnl3-" asp-controller="Home" asp-action="Index">Đến Trang Chủ WebShopHp</a>
+                <br />
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive cart_info">
+                <div class="topClearFix">
+                    <p class="SlCart">Giỏ Hàng Của Bạn(Có @ViewBag.SumProduct) </p>
+                    <a class="Backhome" asp-controller="Home" asp-action="Index">Đến Trang Chủ WebShopHp</a>
+                </div>
+                <table class="table table-condensed">
+                    <thead style="background-color: aliceblue">
+                        <tr class="cart_menu">
+                            <td class="image">Ảnh</td>
+                            <td class="description">Tên Sản Phẩm</td>
+                            <td class="price">Giá</td>
+                            <td class="quantity">Số Lượng</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.cart)
+                        {
+                            <tr>
+                                <td class="cart_product">
+                                    <a href=""><img src="~/Images/@item.PathImage" alt="" width="110" height="110"></a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a asp-controller="Product" asp-action="GetByProductId" asp-route-Id="@item.Id">@item.ProducName</a></h4>
+                                    <p>Mã Sản phẩm: @item.Id</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p id="price-a-product">@String.Format("{0:0,0 vnđ}", @item.Price)</p>
+                                </td>
+                                <td class="cart_quantity input-group">
+                                    <div class="cart_quantity_button">
+                                        <a class="btn btn-sm btn-outline-danger" asp-controller="Cart" asp-action="BuyProductsUp" asp-route-id="@item.Id"><i class="fas fa-plus"></i></a>
+                                        <input class="cart_quantity_input" id="cart_quantity_input" type="text" name="quantity"
+                                               value="@item.Quantity" size="2">
+                                        <a class="btn btn-sm btn-outline-danger" asp-controller="Cart" asp-action="BuyProductsDown" asp-route-id="@item.Id"><i class="fas fa-minus"></i></a>
+                                    </div>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" asp-controller="Cart" asp-action="RemoveProduct" asp-route-id="@item.Id"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            @if (ViewBag.cart != null)
+            {
+                <div id="do_action">
+                    <div class="row">
+                        <div class="col-sm-6 offset-sm-6 pull-right">
+                            <div class="total_area">
+                                <ul>
+                                    <li><b>Tổng Tiền : </b><span>@String.Format("{0:0,0 vnđ}", @ViewBag.total)</span></li>
+                                </ul>
+                                <a asp-controller="Checkout" asp-action="Index" class="btn btn-primary BuyProduct">Đặt hàng luôn</a>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-primary continue">Tiếp tục mua sắm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <br />
+    <br />
+</main>

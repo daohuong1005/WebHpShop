@@ -1,0 +1,119 @@
+﻿.sale {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    border-radius: 45px;
+    background-color: sandybrown;
+    top: 0%;
+    left: 69%;
+    text-align: center;
+    line-height: 45px;
+}
+
+#special-price .grid2 .grid-item {
+    margin-right: 1.2rem;
+    margin-top: 1rem;
+}
+
+.container {
+    background-color: white;
+}
+
+main#main-site {
+    background-color: #f8f9fa;
+}
+
+.owl-stage-outer {
+    background-color: white;
+}
+
+p.price-book-detail {
+    font-size: -webkit-xxx-large;
+    color: RED;
+}
+
+.container2 {
+    margin-left: 200px;
+}
+
+.fs-ghnull {
+    text-align: center;
+    padding: 30px 10px;
+    background: #fff;
+    margin: 10px 0 30px;
+    margin-top: 50px;
+    height: 400px;
+}
+
+a.fs-ghnl3- {
+    display: inline-block;
+    font-size: 14px;
+    color: #307f0f;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    background-color: #fff;
+    border: solid 1px #34a105;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+p.SlCart {
+    float: left;
+}
+
+a.Backhome {
+    float: right;
+}
+
+.col-sm-6.offset-sm-6.pull-right {
+    margin-bottom: 50px;
+}
+
+.topClearFix {
+    margin-top: 50px;
+}
+
+a.navbar-brand {
+    margin-left: 105px;
+}
+
+a.notification-group {
+    margin-left: 300px;
+}
+
+div#search-bar {
+    margin-left: 100px;
+}
+
+button#button-addon5 {
+    background-color: steelblue;
+}
+
+.ContentCart {
+    margin-top: 50px;
+}
+
+.review-payment {
+    margin-top: 10px;
+}
+
+.IntGioHang {
+    height: 300px;
+    text-align: center;
+}
+
+.formDangKy {
+    margin-left: 40%;
+    border: 1px solid;
+    width: 460px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.containers {
+    background-color: #d5f7f9;
+}
+

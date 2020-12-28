@@ -1,0 +1,144 @@
+﻿@model WebHpShop.Reponsitory.Dto.UserDto
+@{
+    ViewBag.Title = "Register";
+    Layout = "_LayoutHomePage";
+}
+<main id="main-site">
+    <div class="containers">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <form asp-action="Register" asp-controller="User" class="form-group">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                            <h3><b>Đăng Kí</b></h3>
+                            <div class="formRegister">
+                                <table class="formCenter">
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Họ</label>
+                                                <input asp-for="FirstName" type="text" class="form-control" placeholder="Họ" />
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Tên</label>
+                                                <input asp-for="LastName" type="text" class="form-control" placeholder="Tên" />
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Ngày Sinh</label>
+                                                <input asp-for="Birthday" type="date" class="form-control" placeholder="Ngày Sinh" />
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Giới Tính</label>
+                                                <select asp-for="Gender" class="form-control">
+                                                    <option value="true">Nam</option>
+                                                    <option value="false">Nữ</option>
+                                                </select>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span asp-validation-for="Birthday" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <span asp-validation-for="Gender" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Địa Chỉ</label>
+                                                <input asp-for="Address" type="text" class="form-control" placeholder="Địa Chỉ" />
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Email</label>
+                                                <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Số Điện Thoại</label>
+                                                <input asp-for="Phone" type="number" class="form-control" placeholder="Số Điện Thoại" />
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Tên Đăng Nhập</label>
+                                                <input asp-for="Username" type="text" class="form-control" placeholder="Tên Đăng Nhập" />
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <span asp-validation-for="Username" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Mật Khẩu</label>
+                                                <input asp-for="Password" type="password" class="form-control" placeholder="Mật Khẩu" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                                <div class="form-group">
+                                    <input type="submit" value="Đăng Ký" class="btn btn-primary" />
+                                    <div class="login">
+                                        Bạn đã Có Tài Khoản ? <a asp-action="Login2" asp-controller="User">Đăng Nhập</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</main>

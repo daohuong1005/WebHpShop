@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WebHpShop.Domain.Entities.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_layoutAdmin";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<h1 class="bg-info text-white">Danh Sách Comment</h1>
+<div class="container">
+    <br />
+    <div style="width:100%; margin:0 auto;">
+        <table id="gridComment" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Mã</th>
+                    <th>Nội Dung</th>
+                    <th>Sản Phẩm</th>
+                    <th>Tài Khoản Bình Luận</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<br />
+
+
+@section Scripts{
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+
+
+        
+        // show data grid
+        $(document).ready(function () {
+            $("#gridComment").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Comment/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "commentId", "name": "CommentId", "autoWidth": true },
+                    { "data": "commentId", "name": "CommentId", "autoWidth": true },
+                    { "data": "content", "name": "Content", "autoWidth": true },
+                    { "data": "productName", "name": "productName", "autoWidth": true },
+                    { "data": "username", "name": "Username", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta)
+                        {
+                            return "<a href='#' class='fas fa-trash-alt' onclick=DeleteData('" + full.commentId + "');></a>"
+                                ;
+                        }
+                    },
+
+                ]
+
+            });
+        });
+
+        function DeleteData(commentId)
+        {
+            if (confirm("Bạn thật sự muốn xóa bình luận này ...?"))
+            {
+                Delete(commentId);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function Delete(commentId){
+            var url = '@Url.Content("~/")' + "Comment/DeleteAdmin/";
+            $.post(url, { id: commentId }, function (data)
+                {
+                    if (data)
+                    {
+                        oTable = $('#gridComment').DataTable();
+                        oTable.draw();
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+        }
+    </script>
+}

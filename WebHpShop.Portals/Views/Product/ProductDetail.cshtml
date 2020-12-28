@@ -1,0 +1,311 @@
+﻿@using Microsoft.AspNetCore.Http
+@using WebHpShop.Portals.Hepler
+@using WebHpShop.Domain.Entities
+@using WebHpShop.Service.ViewModel
+@model WebHpShop.Service.ViewModel.ProductViewModel
+
+@{ ViewData["Title"] = "GetByProductId";
+    Layout = "_LayoutHomePage";
+    IEnumerable<ImageViewModel> listImage = (IEnumerable<ImageViewModel>)ViewBag.ListImage;
+    //IList<UserCommentViewModel> listComment = (IList<UserCommentViewModel>)ViewBag.ListComment;
+    IEnumerable<ProductViewModel> ListProductlq = (IEnumerable<ProductViewModel>)ViewBag.ListProductlq;
+    IEnumerable<ManufacturerViewModel> Manufacture = (IEnumerable<ManufacturerViewModel>)ViewBag.Manufacture;
+    IEnumerable<CategoryViewModel> Category = (IEnumerable<CategoryViewModel>)ViewBag.Category;
+    IEnumerable<SupplierViewModel> Supplier = (IEnumerable<SupplierViewModel>)ViewBag.Supplier;
+    IEnumerable<ImageViewModel> images = (IEnumerable<ImageViewModel>)ViewBag.Image;
+    IEnumerable<DiscountViewModel> Discount = (IEnumerable<DiscountViewModel>)ViewBag.Discount;
+
+    //int count = 0;
+    //bool istrue = true;
+    //string url = "";
+
+
+}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="~/homepage/style.css" rel="stylesheet" />
+<main id="main-site">
+
+    <!--   product  -->
+    <section id="product" class="py-3">
+        <div class="container">
+            <br />
+            <br />
+            <h2>@Model.ProductName </h2>
+            <div class="row">
+
+                <div class="col-sm-6">
+                    @foreach (var item in images)
+                    {
+                        <img src="~/Images/@item.Url" alt="product" class="img-fluid" style="height: 518px; margin-top: 50px;">
+                    }
+                    <div class="form-row pt-4 font-size-16 font-baloo">
+                        <div class="col">
+                            <button type="submit" id="BuyNow" class="btn btn-warning form-control">Mua Ngay</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 py-5">
+
+                    <hr class="m-0">
+                    <!---    product price       -->
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            <tr>
+                                @foreach (var item in Manufacture)
+                                {
+                                    <td>Hãng</td>
+                                    <td>@item.manufacturerName</td>
+                                }
+                            </tr>
+                            <tr>
+                                @foreach (var item in Supplier)
+                                {
+                                    <td>Nhà Cung Cấp</td>
+                                    <td>@item.SupplierName</td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>Hệ Điều Hành</td>
+                                <td>
+                                    @Model.OperatingSystem
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CPU</td>
+                                <td>
+                                    @Model.GPU
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ram</td>
+                                <td>
+                                    @Model.Ram GB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>GPU</td>
+                                <td>@Model.GPU</td>
+                            </tr>
+                            <tr>
+                                <td>Độ Phần Giải</td>
+                                <td>@Model.Pixel</td>
+                            </tr>
+                            <tr>
+                                <td>Kích Thước Màn Hình</td>
+                                <td>@Model.Size</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    @if (Discount.Count() == 0)
+                    {
+                        <p class="price-book-detail">@String.Format("{0:0,0 vnđ}", Model.CostSell)</p>
+                    }
+                    else
+                    {
+                        foreach (var item in Discount)
+                        {
+                            <div style="margin-bottom:22px">
+                                <p class="price-book-detail">@String.Format("{0:0,0 vnđ}", (Model.CostSell - (Model.CostSell / 100 * item.DiscountMoney)))</p>
+                                <span><del> @String.Format("{0:0,0 vnđ}", Model.CostSell)</del></span>
+                            </div>
+                        }
+                    }
+                    <!---    !product price       -->
+                    <div class="col-6">
+                        <!-- product qty section -->
+                        <div class="qty d-flex">
+                            <h6 class="font-baloo">Số Lượng</h6>
+                            <div class="px-4 d-flex font-rale">
+                                <button class="qty-up border bg-light" data-id="pro1"><i class="fas fa-angle-up"></i></button>
+                                <input type="text" data-id="pro1" id="qty_input" class="qty_input border px-2 w-50 bg-light" disabled value="1" placeholder="1">
+                                <button data-id="pro1" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <!-- !product qty section -->
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a href="#productDetail" class="nav-link active" role="tab" data-toggle="tab">Chi Tiết Sản Phẩm</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#comment" class="nav-link" role="tab" data-toggle="tab">Bình Luận</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in show" id="productDetail">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Mã Sản Phẩm</th>
+                                        <td>@Model.ProductId</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tên Sản Phẩm</th>
+                                        <td>@Model.ProductName</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hệ Điều Hành</th>
+                                        <td>
+                                            @Model.OperatingSystem
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>CPU</th>
+                                        <td>
+                                            @Model.GPU
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ram</th>
+                                        <td>
+                                            @Model.Ram GB
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rom</th>
+                                        <td>
+                                            @Model.Rom GB
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>GPU</th>
+                                        <td>@Model.GPU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Màn Hình</th>
+                                        <td>@Model.Screen</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Độ Phần Giải</th>
+                                        <td>@Model.Pixel</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kích Thước Màn Hình</th>
+                                        <td>@Model.Size</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Camera Trước</th>
+                                        <td>@Model.CameraFirst</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Camera Sau</th>
+                                        <td>@Model.CameraLast</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Màu</th>
+                                        <td>@Model.Color</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hỗ Trợ</th>
+                                        <td>@Model.Support</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                           
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="comment">
+                            <div class="col-sm-12">
+                                <div class="getAllComment">
+
+                                </div>
+                                <p><b>Hãy để lại bình luận của bạn</b></p>
+
+                                @if (SessionHelper.GetSession<User>(Context.Session, "Login2") == null)
+                                {
+                                    <div class="noCmt">
+                                        <p>Bạn cần đăng nhập để bình luận nội dung này !!!</p>
+                                        <p><a asp-action="Login2" asp-controller="User">Đăng Nhập</a></p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    var x = SessionHelper.GetSession<User>(Context.Session, "Login2");
+                                    var UserId = x.UserId;
+                                    
+                                <form asp-action="Create" asp-controller="Comment" method="post">
+                                    <input value="@Model.ProductId" name="productId" type="hidden" />
+                                    <input value="@UserId" name="userId" type="hidden" />
+                                    <textarea name="contentCmt" id="contentCmt" placeholder="Nội dung bình luận" style="width: 400px;height:100px"></textarea>
+                                    <input type="submit" value="Bình Luận" class="btns btn-primary" style="margin-bottom: 27px;width: 100px;">
+                                </form>
+                                       
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--   !product  -->
+</main>
+<script>
+
+    // product qty section
+    $(document).ready(function () {
+
+
+
+        $.ajax({
+
+            url: '/Comment/GetAllComment/',
+            data: { id : @Model.ProductId },
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+                $('.getAllComment').html(data);
+            }
+        });
+
+        // product qty section
+        let $qty_up = $(".qty .qty-up");
+        let $qty_down = $(".qty .qty-down");
+        // let $input = $(".qty .qty_input");
+
+        // click on qty up button
+        $qty_up.click(function (e) {
+            let $input = $(`.qty_input[data-id='${$(this).data("id")}']`);
+            if ($input.val() >= 1 && $input.val() <= 9) {
+                $input.val(function (i, oldval) {
+                    return ++oldval;
+                });
+            }
+        });
+
+        // click on qty down button
+        $qty_down.click(function (e) {
+            let $input = $(`.qty_input[data-id='${$(this).data("id")}']`);
+            if ($input.val() > 1 && $input.val() <= 10) {
+                $input.val(function (i, oldval) {
+                    return --oldval;
+                });
+            }
+        });
+
+         $('#BuyNow').click(function() {
+             var quantityOrder = document.getElementById("qty_input").value;
+        $.ajax({
+            type: "GET",
+            url: "/Cart/BuyProducts",
+            data: { id: @Model.ProductId,quantity : quantityOrder },
+            dataType: "text",
+            success: function () {
+                alert("Đã thêm vào giỏ hàng");
+            }
+        });
+    });
+
+
+    });
+</script>

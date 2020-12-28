@@ -1,0 +1,38 @@
+﻿@model WebHpShop.Reponsitory.Dto.DiscountDto
+@{
+    ViewBag.Title = "Update";
+    Layout = "_LayoutAdmin";
+}
+<div class="modal-body">
+    <form asp-action="Update" asp-controller="Discount" class="form-group">
+        <div asp-validation-summary="ModelOnly" class="alert"></div>
+        <input type="hidden" asp-for="DiscountId" />
+        <div class="form-group">
+            <label class="col-form-label">Nội Dung Khuyễn Mãi</label>
+            <input asp-for="DiscountContent" type="text" class="form-control" placeholder="Nội Dung Khuyễn Mãi" />
+            <span asp-validation-for="DiscountContent" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Ngày Bắt Đầu</label>
+            <input asp-for="DiscountDateStart" type="date" class="form-control" placeholder="Ngày Bắt Đầu" />
+            <span asp-validation-for="DiscountDateStart" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Ngày Kết Thúc</label>
+            <input asp-for="DiscountDateEnd" type="date" class="form-control" placeholder="Ngày Kết Thúc" />
+            <span asp-validation-for="DiscountDateEnd" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label"> Khuyễn Mãi</label>
+            <input asp-for="DiscountMoney" type="number" class="form-control" placeholder="Phần Trăm Khuyễn Mãi" />
+            <span asp-validation-for="DiscountMoney" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Sản Phẩm</label>
+            <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

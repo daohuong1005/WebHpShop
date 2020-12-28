@@ -1,0 +1,203 @@
+﻿
+@{ ViewData["Title"] = "DetailOrder2";
+    Layout = "_LayoutHomePage";
+    IEnumerable<OrderViewModel> Orderss = (IEnumerable<OrderViewModel>)ViewBag.Orderss;
+    IEnumerable<OrderDetailViewModel> OrderDetail = (IEnumerable<OrderDetailViewModel>)ViewBag.OrderDetail;
+}
+<link href="~/homepage/OrderDetail.css" rel="stylesheet" />
+<div class="main-site">
+    <div class="clearfix2" style="height: 20px"></div>
+    <h3 style="margin-left: 174px">Chi Tiết Đơn Hàng</h3>
+    <hr />
+    @foreach (var item in Orderss)
+    {
+        <div class="container" style="background-color: white">
+            <div class="row">
+                <div class="col">
+                    <div>
+
+                        <div>Đơn hàng : @item.OrderId</div>
+                        <small>Đặt Ngày : @item.OrderDate</small>
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="fixTien">
+                        <p>Tổng Tiền : @String.Format("{0:0,0 vnđ}", @item.Total)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear-fixs"></div>
+        <div class="container" style="background-color: white">
+            <div class="row">
+                <div class="col">
+                    <div style="margin-top: 10px">
+                        Kiện Hàng
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="fixTien">
+                        <p>Trạng Thái : @item.NameStt</p>
+                    </div>
+                </div>
+
+            </div>
+            @if (item.StatusId == 1)
+            {
+                <div class="trangThai">
+                    <div class="shipping-status-box">
+                        <ul class="statust-list">
+                            <li class="itemStatust">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1fnQXUHY1gK0jSZTEXXXDQVXa-44-44.svg">
+                                    <p class="status-text">processing</p>
+                                </div>
+                            </li>
+                            <li class="itemStatust">
+                                <hr class="status-line gray">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1mTC6TVP7gK0jSZFjXXc5aXXa-44-44.svg">
+                                    <p class="status-text">Shipped</p>
+                                </div>
+                            </li>
+
+                            <li class="itemStatust">
+                                <hr class="status-line gray">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1nrQjgmslXu8jSZFuXXXg7FXa-44-44.svg">
+                                    <p class="status-text">Delivered</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+            else if (item.StatusId == 2)
+            {
+                <div class="trangThai">
+                    <div class="shipping-status-box">
+                        <ul class="statust-list">
+                            <li class="itemStatust">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1fnQXUHY1gK0jSZTEXXXDQVXa-44-44.svg">
+                                    <p class="status-text">processing</p>
+                                </div>
+                            </li>
+                            <li class="itemStatust">
+                                <hr class="status-line line">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1mTC6TVP7gK0jSZFjXXc5aXXa-44-44.svg">
+                                    <p class="status-text">Shipped</p>
+                                </div>
+                            </li>
+
+                            <li class="itemStatust">
+                                <hr class="status-line gray">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1nrQjgmslXu8jSZFuXXXg7FXa-44-44.svg">
+                                    <p class="status-text">Delivered</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+            else if (item.StatusId == 4)
+            {
+                <div class="trangThai">
+                    <div class="shipping-status-box">
+                        <ul class="statust-list">
+                            <li class="itemStatust">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1fnQXUHY1gK0jSZTEXXXDQVXa-44-44.svg">
+                                    <p class="status-text">processing</p>
+                                </div>
+                            </li>
+                            <li class="itemStatust">
+                                <hr class="status-line line">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1mTC6TVP7gK0jSZFjXXc5aXXa-44-44.svg">
+                                    <p class="status-text">Shipped</p>
+                                </div>
+                            </li>
+
+                            <li class="itemStatust">
+                                <hr class="status-line line">
+                                <div class="satust-processing">
+                                    <img class="status-icon" src="https://laz-img-cdn.alicdn.com/tfs/TB1nrQjgmslXu8jSZFuXXXg7FXa-44-44.svg">
+                                    <p class="status-text">Delivered</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    }
+    <div class="clearfix2" style="height: 1px"></div>
+    <div class="container" style="background-color: white">
+        <div class="row">
+            <div class="col">
+                @foreach (var item in Orderss)
+                {
+                    @if (item.StatusId == 4)
+                    {
+                        <div class="trangThaiDone">
+                            Đã hoàn thành ngày :
+                            @Html.Raw(item.NameStt);
+
+                        </div>
+                    }
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã Sản Phẩm</th>
+                            <th scope="col">Tên Sản Phẩm</th>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số Lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in OrderDetail)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ProductId
+                                </td>
+                                <td>@item.ProductName</td>
+                                <td><img src="~/Images/@item.Img" /></td>
+                                <td>@item.Price</td>
+                                <td>@item.Quantity</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="clearfix2" style="height: 10px"></div>
+    <div class="container" style="background-color: white">
+        <div class="row">
+            <div class="col">
+                @foreach (var item in Orderss)
+                {
+                    <div>
+                        <div>Tài khoản đặt : @item.UserName</div>
+                        <div>Địa Chỉ Đặt : @item.OrderAdress</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
+    <a style="margin-left: 174px" class="fs-ghnl3-" asp-controller="User" asp-action="CustomerDetail">Quay Lại</a>
+    <div class="clearfix2" style="height: 30px"></div>
+</div>

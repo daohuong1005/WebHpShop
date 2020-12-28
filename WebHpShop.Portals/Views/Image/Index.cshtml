@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebHpShop.Domain.Entities.Image>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_layoutAdmin";
+}
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<h1 class="bg-info text-white">Danh Sách Image</h1>
+<button class="btn btn-primary" asp-controller="Image" asp-action="Create"
+        data-toggle="ajax-modal" data-target="#add-contact" id="addBtn">
+    Tạo Mới
+</button>
+<div class="modal fade" id="add-contact" tabindex="-1" role="dialog" aria-labelledby="addImageLabel" aria-hidden="true">
+    <div id="AddContent">
+
+    </div>
+</div>
+<div class="container">
+    <br />
+    <div style="width:100%; margin:0 auto;">
+        <table id="gridImage" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Mã</th>
+                    <th>Ảnh</th>
+                    <th>Hiển Thị</th>
+                    <th>Sẩn Phẩm</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<br />
+
+
+@section Scripts{
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+
+
+        $("#addBtn").click(function () {
+            $.ajax({
+                url: $(this).attr("formaction"),
+            }).done(function (msg) {
+                $("#AddContent").html(msg);
+                $("#add-contact").modal("show");
+            })
+        });
+        $("body").on("click", "#save", function () {
+            var form = $('form');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+            $.ajax({
+                type: "post",
+                url: form.attr('action'),
+                data: {
+                    __RequestVerificationToken: token,
+                    user: {
+                        PositionName: $("#PositionName").val()
+                    }
+                },
+                dataType: "html",
+                success: function (result) {
+                    $("#add-contact").modal("hide");
+                    $("#partial").html(result);
+                }
+            });
+            return false;
+        });
+        // show data grid
+        $(document).ready(function () {
+            $("#gridImage").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Image/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                "columns": [
+                    { "data": "imageId", "name": "ImageId", "autoWidth": true },
+                    { "data": "imageId", "name": "ImageId", "autoWidth": true },
+                    { "data": "productName", "name": "ProductName", "autoWidth": true },
+                    { "data": "isDisplay", "name": "IsDisplay", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) {
+                            var mylink = @Url.Content("~/Images/") + full.url;
+                            return "<img src='" + mylink + "'  width='110px' height='110px'/>";
+                        },
+                    },
+                    {
+                        "render": function (data, type, full, meta)
+                        {
+                            return '<a  class="fas fa-tools" href="/Image/Update/' + full.imageId + '"></a>  ' +
+                                "<a href='#' class='fas fa-trash-alt' onclick=DeleteData('" + full.imageId + "');></a>"
+                                ;
+                        }
+                    },
+
+                ]
+
+            });
+        });
+
+        function DeleteData(imageId)
+        {
+            if (confirm("Are you sure you want to delete ...?"))
+            {
+                Delete(imageId);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function Delete(imageId){
+        var url = '@Url.Content("~/")' + "Image/DeleteConfirmed/";
+            $.post(url, { id: imageId }, function (data)
+                {
+                    if (data)
+                    {
+                        oTable = $('#gridImage').DataTable();
+                        oTable.draw();
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+        }
+    </script>
+}

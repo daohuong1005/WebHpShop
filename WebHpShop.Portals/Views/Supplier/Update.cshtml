@@ -1,0 +1,34 @@
+﻿@model WebHpShop.Reponsitory.Dto.SupplierDto
+@{
+    ViewBag.Title = "Update";
+    Layout = "_LayoutAdmin";
+}
+<div class="modal-body">
+    <form asp-action="Update" asp-controller="Supplier" class="form-group">
+        <div asp-validation-summary="ModelOnly" class="alert"></div>
+        <div class="form-group">
+            <label class="col-form-label">Mã Nhà Cung Cấp</label>
+            <input asp-for="SupplierId" type="text" class="form-control" placeholder="Tên Nhà Cung Cấp" />
+            <span asp-validation-for="SupplierId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Tên Nhà Cung Cấp</label>
+            <input asp-for="SupplierName" type="text" class="form-control" placeholder="Tên Nhà Cung Cấp" />
+            <span asp-validation-for="SupplierName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Mã Nhà Cung Cấp</label>
+            <input asp-for="SupplierCode" type="text" class="form-control" placeholder="Mã Nhà Cung Cấp" />
+            <span asp-validation-for="SupplierCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Mã Nhà Cung Cấp</label>
+            <input asp-for="Email" type="text" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+</div>

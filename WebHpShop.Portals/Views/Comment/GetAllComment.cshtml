@@ -1,0 +1,33 @@
+﻿
+@model IEnumerable<WebHpShop.Service.ViewModel.CommentViewModel>
+@{ 
+    Layout = null;
+}
+<div class="scrollbar scrollbar-primary" style="overflow-y: scroll;height: 312px" id="comment">
+
+    @if(Model.Count() == 0)
+    {
+        <div>
+            <p>Chưa có bình luận nào</p>
+        </div>
+    }
+    else
+    @foreach (var item in Model)
+    {
+        var productId = item.ProductId;
+        <ul>
+            <li class="cmt" style="list-style: none;">
+                <i class="fas fa-user"></i>
+                <b>@item.NameUser</b>
+                <small>@item.DateCreate</small>
+            </li>
+            <li class="cmt" style="list-style: none;">
+                <div>
+                    <i class="fas fa-comments"></i> @item.Content
+                </div>
+            </li>
+        </ul>
+        <hr />
+    }
+</div>
+
